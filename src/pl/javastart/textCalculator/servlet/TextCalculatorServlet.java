@@ -12,6 +12,8 @@ import java.io.PrintWriter;
 
 @WebServlet("/calctext")
 public class TextCalculatorServlet extends HttpServlet {
+    private TextService service = new TextService();
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
@@ -20,8 +22,7 @@ public class TextCalculatorServlet extends HttpServlet {
         String text = request.getParameter("addedText");
         PrintWriter writer = response.getWriter();
 
-        if (!(text.equals(null) || text.equals(""))) {
-            TextService service = new TextService();
+        if (!(text == null || text.equals(""))) {
             writer.println(text + "<br/>");
             writer.println("<h2> Ilość słów: " + service.numberOfWords(text) + "</h2>");
             writer.println("<h2> Ilość znaków: " + service.numberOfCharacters(text) + "</h2>");
